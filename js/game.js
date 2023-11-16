@@ -1,47 +1,83 @@
 var hody = [];
+var hody2 = [];
+var select;
+var cube;
+var stat;
+
+document.getElementById('addplayer').addEventListener('click', function() {
+    var div = document.getElementById('druhy_hrac');
+    div.style.display = 'block';
+});
+
+document.getElementById('player').addEventListener('click', function() {
+    var div = document.getElementById('druhy_hrac');
+    div.style.display = 'none';
+    hody2.splice(0,hody2.length);
+    document.getElementById('result2').innerHTML = '<p>Zde budou Výsledky</p>';
+
+});
+// 1: kostka
 document.getElementById('reset').addEventListener('click', function(){
         hody.splice(0,hody.length);
-        document.getElementById('result').innerHTML = '<p></p>';
+        document.getElementById('result').innerHTML = '<p>Zde budou Výsledky</p>';
 
 });
 document.getElementById('game').addEventListener('click', function () {
+    select = hody;cube = 'cube';stat = 'result';
+    animace();
+
+});
+//---------------------->
+//  2. kostka
+document.getElementById('reset2').addEventListener('click', function(){
+    hody2.splice(0,hody2.length);
+    document.getElementById('result2').innerHTML = '<p>Zde budou Výsledky</p>';
+
+});
+document.getElementById('game2').addEventListener('click', function () {
+
+    select = hody2;cube = 'cube2';stat = 'result2';
     animace();
 });
 
+//
+
 function animace() {
     var el = 0;
+    var h;
 
     for (let a = 1; a < 10; a++) {
-        setTimeout(function () {
-            hod(a);
+        setTimeout(function() {
+            hod();
+            if (a === 9) {
+                select.push(h);
+                console.log(select);
+                statistik(h);
+            }
         }, el);
+
         el += 300;
     }
 
-    function hod(a) {
-        var h = Math.ceil(Math.random() * 6);
-        document.getElementById('cube').src = 'img/kostka' + h + '.png';
-
-        if (a === 9) {
-            hody.push(h);
-            console.log(hody);
-            statistik(h);
-        }
+    function hod() {
+        h = Math.ceil(Math.random() * 6);
+        document.getElementById(cube).src = 'img/kostka' + h + '.png';
     }
 }
 
-function statistik(h) {
-    document.getElementById('result').innerHTML = '<p>Hod: ' + h + '</p>';
-    document.getElementById('result').innerHTML +=
-        '<p>Počet hodů: ' + hody.length + '</p>';
-    document.getElementById('result').innerHTML +=
-        '<p>Součet hodů: ' + suma(hody) + '</p>';
-    document.getElementById('result').innerHTML +=
-        '<p>Průměr hodů: ' + average(suma(hody), hody.length) + '</p>';
-    document.getElementById('result').innerHTML +=
-        '<p>Nejvyšší hod: ' + maximum(hody) + '</p>';
-    document.getElementById('result').innerHTML +=
-        '<p>Nejnižší hod: ' + minimum(hody) + '</p>';
+
+function statistik(hj) {
+    document.getElementById(stat).innerHTML = '<p>Hod: ' + hj + '</p>';
+    document.getElementById(stat).innerHTML +=
+        '<p>Počet hodů: ' + select.length + '</p>';
+    document.getElementById(stat).innerHTML +=
+        '<p>Součet hodů: ' + suma(select) + '</p>';
+    document.getElementById(stat).innerHTML +=
+        '<p>Průměr hodů: ' + average(suma(select), select.length) + '</p>';
+    document.getElementById(stat).innerHTML +=
+        '<p>Nejvyšší hod: ' + maximum(select) + '</p>';
+    document.getElementById(stat).innerHTML +=
+        '<p>Nejnižší hod: ' + minimum(select) + '</p>';
 }
 
 function suma(cisla) {
@@ -71,3 +107,5 @@ function minimum(cisla) {
 function average(sum, count) {
     return (sum / count).toFixed(2);
 }
+
+

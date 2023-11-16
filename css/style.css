@@ -1,0 +1,53 @@
+body {
+    background-color: aqua;
+}
+
+.kostka {
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    border: solid 3px black;
+    border-radius: 5px;
+    padding: 50px;
+}
+
+.result {
+    text-align: center;
+    margin: auto;
+    padding: 15px;
+    background-color: white;
+    border: solid black 3px;
+}
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+
+/* Přidáme styl pro zobrazení gridu */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 0px 600px 0px 600px;
+    justify-content: space-between; /* Rozdělí prostor mezi sloupci */
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.grid-item .button-container {
+    display: flex;
+    gap: 10px; /* Odstup mezi tlačítky */
+}
+
+
+#druhy_hrac{
+
+    display: none;
+}
+p{
+    font-weight: bold;
+    color: red;
+}
